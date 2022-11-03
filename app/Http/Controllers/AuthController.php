@@ -80,7 +80,7 @@ class AuthController extends Controller
             $user = new User();
             $user->name = 'DEV-USER';
             $user->username = 'dev-user';
-            $user->password = Hash::make('123456');;
+            $user->password = Hash::make('123456');
             $user->role_id = $role->id;
             $user->save();
 
