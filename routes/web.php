@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
@@ -16,8 +17,18 @@ use App\Http\Controllers\ProductsController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/login', [AuthController::class, 'index']);
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::put('/products/stock/{id}', [ProductsController::class, 'addStock']);
+Route::get('/seed/{token}', [AuthController::class, 'seed']);
 
-Route::resource('/products', ProductsController::class);
+Route::post('/logout', [AuthController::class, 'logout']);
+
+Route::group(['middleware' => 'auth'], function () {
+
+   Route::get('/', [HomeController::class, 'index']);
+   
+   Route::put('/products/stock/{id}', [ProductsController::class, 'addStock']);
+   
+   Route::resource('/products', ProductsController::class);
+});
