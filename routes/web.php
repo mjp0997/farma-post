@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +26,13 @@ Route::get('/seed/{token}', [AuthController::class, 'seed']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::group(['middleware' => 'auth'], function () {
+   Route::group(['middleware' => 'role:DEV,ADMIN'], function () {
+      Route::get('/', [HomeController::class, 'index']);
+   
+      Route::put('/products/stock/{id}', [ProductsController::class, 'addStock']);
+      
+      Route::resource('/products', ProductsController::class);
 
-   Route::get('/', [HomeController::class, 'index']);
-   
-   Route::put('/products/stock/{id}', [ProductsController::class, 'addStock']);
-   
-   Route::resource('/products', ProductsController::class);
+      Route::resource('/users', UsersController::class);
+   });
 });
