@@ -42,11 +42,15 @@
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
          <ul class="ms-md-auto navbar-nav justify-content-end">
             <li class="nav-item d-flex align-items-center">
-               <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+               <form method="POST" action="{{ url('/logout') }}" class="nav-link text-white font-weight-bold px-0" id="logout">
+                  @csrf
+
+                  @method('POST')
+
                   <i class="fa fa-sign-out me-sm-1"></i>
 
-                  <span class="d-sm-inline d-none">Cerrar sesión</span>
-               </a>
+                  <span type="submit" class="d-sm-inline d-none">Cerrar sesión</span>
+               </form>
             </li>
 
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -64,3 +68,13 @@
       </div>
    </div>
 </nav>
+
+<script type="text/javascript">
+   document.addEventListener("DOMContentLoaded", () => {
+      const logout = document.querySelector('#logout');
+
+      logout.addEventListener('click', () => {
+         logout.submit();
+      });
+   });
+</script>
