@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,9 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+
+// TODO: ruta para incrementar el stock
+
+Route::put('/products/stock/{id}', [ProductsController::class, 'addStock']);
+
+Route::resource('/products', ProductsController::class);
