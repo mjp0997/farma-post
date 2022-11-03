@@ -13,6 +13,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // TODO: verificar rol del usuario autenticado y redireccionar
+
         $bread = [
             [
                 'text' => 'Inicio',
