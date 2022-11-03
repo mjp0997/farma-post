@@ -18,8 +18,6 @@ use App\Http\Controllers\ProductsController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-// TODO: ruta para incrementar el stock
-
 Route::put('/products/stock/{id}', [ProductsController::class, 'addStock']);
 
 Route::resource('/products', ProductsController::class);
