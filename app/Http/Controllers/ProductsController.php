@@ -68,7 +68,7 @@ class ProductsController extends Controller
 
         $product->save();
         
-        return redirect('products/1');
+        return redirect('products/'.$product->id);
     }
 
     /**
