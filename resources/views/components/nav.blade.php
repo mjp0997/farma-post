@@ -7,20 +7,36 @@
                <a class="opacity-5 text-white" href="{{ url('/') }}">FarmaPOST</a>
             </li>
 
-            @foreach ($bread as $path)
+            @if (isset($bread))
+               @foreach ($bread as $path)
+                  <li
+                     class="breadcrumb-item text-white"
+                     aria-current="page"
+                  >
+                     <a
+                        href='{{ url($path['link']) }}'
+                        class="text-sm text-white @if($loop->last) fw-bolder @endif"
+                     >{{ $path['text'] }}</a>
+                  </li>
+               @endforeach
+            @else
                <li
                   class="breadcrumb-item text-white"
                   aria-current="page"
                >
                   <a
-                     href='{{ url($path['link']) }}'
-                     class="text-sm text-white @if($loop->last) fw-bolder @endif"
-                  >{{ $path['text'] }}</a>
+                     href='#'
+                     class="text-sm text-white fw-bolder"
+                  >Error 404</a>
                </li>
-            @endforeach
+            @endif
          </ol>
 
-         <h6 class="font-weight-bolder text-white mb-0 text-uppercase">{{ $bread[count($bread) - 1]['text'] }}</h6>
+         @if (isset($bread))
+            <h6 class="font-weight-bolder text-white mb-0 text-uppercase">{{ $bread[count($bread) - 1]['text'] }}</h6>
+         @else
+            <h6 class="font-weight-bolder text-white mb-0 text-uppercase">Error 404</h6>
+         @endif
       </nav>
 
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
