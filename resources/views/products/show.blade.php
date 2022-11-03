@@ -19,19 +19,19 @@
 
                <div class='row'>
                   <div class='col-md'>
-                     <span class='text-xs fw-bolder text-dark'>Precio compra</span>
+                     <span class='text-xs fw-bolder text-dark'>Precio compra:</span>
 
                      <p class='fw-bold'>{{ $product->buy_price }}</p>
                   </div>
 
                   <div class='col-md'>
-                     <span class='text-xs fw-bolder text-dark'>Precio venta</span>
+                     <span class='text-xs fw-bolder text-dark'>Precio venta:</span>
 
                      <p class='fw-bold'>{{ $product->sell_price }}</p>
                   </div>
 
                   <div class='col-md-3'>
-                     <span class='text-xs fw-bolder text-dark'>Stock</span>
+                     <span class='text-xs fw-bolder text-dark'>Stock:</span>
 
                      <p class='fw-bold'>{{ $product->stock }}</p>
                   </div>

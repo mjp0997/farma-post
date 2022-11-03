@@ -8,7 +8,7 @@
                <div class='row'>
                   <div class='col-md-6 mb-2 mb-md-0'>
                      <div class="d-flex justify-content-between">
-                        <h6 class="mb-0">Nuevo producto</h6>
+                        <h6 class="mb-0">Editar producto #{{ $product->id }}</h6>
                      </div>
                   </div>
                </div>
