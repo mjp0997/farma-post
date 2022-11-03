@@ -20,8 +20,8 @@ class Access
         $user = Auth::user();
 
         if (!in_array($user->role->name, $types)) {
-            return redirect('/')
-                ->with('error', 'No posee los privilegios necesarios para la sección solicitada');
+            // TODO: cambiar redirección a la vista de usuarios
+            return redirect('/');
         }
         
         return $next($request);
