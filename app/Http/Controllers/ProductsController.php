@@ -167,7 +167,7 @@ class ProductsController extends Controller
             ->with('deleted', 'El producto: '.$product->name.'. Ha sido eliminado satisfactoriamente');
     }
 
-    public function addStock($id, StockRequest $request)
+    public function add_stock($id, StockRequest $request)
     {
         $data = $request->validated();
 
@@ -177,5 +177,26 @@ class ProductsController extends Controller
         $product->save();
 
         return redirect('/products/'.$id);
+    }
+
+    public function getAllApi()
+    {
+        $products = Product::orderBy('name')->get();
+
+        $collection = collect($products);
+
+        $mapped = $collection->map(function ($item) {
+            $item->price = $item->sell_price;
+
+            unset($item->buy_price);
+            unset($item->sell_price);
+            unset($item->created_at);
+            unset($item->updated_at);
+            unset($item->deleted_at);
+
+            return $item;
+        });
+
+        return $mapped->all();
     }
 }
