@@ -112,6 +112,8 @@ class OperationController extends Controller
     {
         $data = $request->validated();
 
+        dd($data);
+
         // TODO: manejar lógica
     }
 
