@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientsController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
@@ -35,6 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
       Route::resource('/products', ProductsController::class);
 
       Route::resource('/users', UsersController::class);
+
+      Route::resource('/clients', ClientsController::class);
    });
 
    Route::get('/sale', [OperationController::class, 'index']);
