@@ -42,7 +42,12 @@
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
          <ul class="ms-md-auto navbar-nav justify-content-end">
             <li class="nav-item d-flex align-items-center">
-               <form method="POST" action="{{ url('/logout') }}" class="nav-link text-white font-weight-bold px-0" id="logout">
+               <form
+                  method="POST"
+                  action="{{ url('/logout') }}"
+                  class="nav-link text-white font-weight-bold position-relative logout"
+                  id="logout"
+               >
                   @csrf
 
                   @method('POST')

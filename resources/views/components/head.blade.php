@@ -2,8 +2,10 @@
    <meta charset="utf-8" />
 
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}" />
    
-   <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+   <link rel="icon" type="image/png" href="{{ asset('/logo.png') }}">
 
    <title>Argon Dashboard 2 by Creative Tim</title>
 
