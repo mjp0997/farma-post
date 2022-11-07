@@ -100,7 +100,7 @@
                            value="{{ old('stock', '') }}"
                         >
 
-                        @error('sell_price')
+                        @error('stock')
                            <label class='ms-2 text-danger'>
                               {{ $message }}
                            </label>
