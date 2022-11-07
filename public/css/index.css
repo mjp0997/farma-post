@@ -12,3 +12,110 @@
    font-weight: 400!important;
    line-height: 80%;
 }
+
+.logout {
+   border-radius: 7px;
+
+   bottom: 0;
+
+   transition: background-color 0.2s ease-in-out, bottom 0.2s ease-in-out;
+
+   cursor: pointer;
+}
+
+.logout:hover {
+   background-color: #fb6340!important;
+
+   bottom: 0.2rem;
+}
+
+.scroll-bar::-webkit-scrollbar {
+   width: 0.4rem;
+}
+
+.scroll-x::-webkit-scrollbar {
+   height: 0.4rem;
+}
+
+.scroll-bar::-webkit-scrollbar-track {
+   background: rgba(0, 0, 0, 0);
+}
+
+.scroll-bar::-webkit-scrollbar-thumb {
+   background: #888;
+
+   border-radius: 0.2rem;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb:hover {
+   background: #555;
+}
+
+.operation-input {
+   border: none;
+
+   padding: 0;
+   margin: 0;
+
+   text-align: center;
+
+   appearance: textfield;
+   -moz-appearance: textfield;
+
+   outline: none;
+
+   width: 3rem;
+}
+
+.operation-input::-webkit-outer-spin-button,
+.operation-input::-webkit-inner-spin-button {
+   appearance: textfield;
+   -webkit-appearance: none;
+}
+
+.operation-input:disabled {
+   background-color: transparent;
+}
+
+.pointer {
+   cursor: pointer;
+}
+
+.client-modal-container {
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+
+   z-index: 1000;
+
+   background-color: rgba(0, 0, 0, 0.3);
+
+   backdrop-filter: blur(0.3rem);
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.client-modal {
+   width: 40%;
+}
+
+.clean-input {
+   appearance: textfield;
+   -moz-appearance: textfield;
+}
+
+.clean-input::-webkit-outer-spin-button,
+.clean-input::-webkit-inner-spin-button {
+   appearance: textfield;
+   -webkit-appearance: none;
+}
+
+.operation-logout {
+   position: fixed!important;
+   top: 1.8rem;
+   right: 1.8rem;
+}
