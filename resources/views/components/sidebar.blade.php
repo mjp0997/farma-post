@@ -15,7 +15,7 @@
 
    <hr class="horizontal dark mt-0">
    
-   <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+   <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main" style="height: unset!important;">
       <ul class="navbar-nav">
          <li class="nav-item">
             <a
@@ -66,6 +66,19 @@
                </div>
                
                <span class="nav-link-text ms-1">Usuarios</span>
+            </a>
+         </li>
+
+         <li class="nav-item">
+            <a
+               class="nav-link {{ request()->is('clients*') ? 'active' : '' }}"
+               href="{{ url('/clients') }}"
+            >
+               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="ni ni-support-16 text-secondary text-sm opacity-10"></i>
+               </div>
+               
+               <span class="nav-link-text ms-1">Clientes</span>
             </a>
          </li>
       </ul>
