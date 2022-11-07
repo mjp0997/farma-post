@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OperationController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UsersController;
 
@@ -29,10 +30,15 @@ Route::group(['middleware' => 'auth'], function () {
    Route::group(['middleware' => 'role:DEV,ADMIN'], function () {
       Route::get('/', [HomeController::class, 'index']);
    
-      Route::put('/products/stock/{id}', [ProductsController::class, 'addStock']);
+      Route::put('/products/stock/{id}', [ProductsController::class, 'add_stock']);
       
       Route::resource('/products', ProductsController::class);
 
       Route::resource('/users', UsersController::class);
    });
+
+   Route::get('/sale', [OperationController::class, 'index']);
+   Route::post('/sale/client/create', [OperationController::class, 'store_client']);
+   Route::post('/sale/client', [OperationController::class, 'handle_client']);
+   Route::post('/sale', [OperationController::class, 'store']);
 });
