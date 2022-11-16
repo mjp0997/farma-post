@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SalesLine extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = ['sale_id', 'product_id', 'quantity', 'current_price'];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
 }
