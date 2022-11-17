@@ -10,7 +10,7 @@ class SalesLine extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['sale_id', 'product_id', 'quantity', 'current_price'];
+    protected $fillable = ['sale_id', 'product_id', 'quantity', 'current_price', 'current_buy_price'];
 
     public function product()
     {
