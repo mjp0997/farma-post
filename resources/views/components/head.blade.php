@@ -4,6 +4,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
    <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}" />
+   <meta name="products-uri" id="products-uri" content="{{ url('/api/products') }}" />
    
    <link rel="icon" type="image/png" href="{{ asset('/logo.png') }}">
 

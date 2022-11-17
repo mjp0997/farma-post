@@ -7,10 +7,12 @@ let cart = [];
 document.addEventListener('DOMContentLoaded', async () => {
    const token = document.querySelector('#csrf-token').content;
 
+   const uri = document.querySelector('#products-uri').content;
+
    const searchForm = document.querySelector('#search-form');
    const clean = document.querySelector('#clean-btn');
 
-   const data = await fetch('http://localhost:8000/api/products', {
+   const data = await fetch(uri, {
       headers: {
          'Content-Type': 'application/json',
          '_token': token
