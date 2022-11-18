@@ -1,7 +1,6 @@
 @extends('layouts.operation')
 
 @section('content')
-   {{-- TODO: funcionalidad del modal --}}
    @if (!$allow)
       <div class='client-modal-container' id="modal">
          <div class='client-modal'>
@@ -166,6 +165,12 @@
          @include('components.operation-logout')
       </div>
    @endif
+
+   <input disabled type='hidden' name='old_cart' value="{{ json_encode(old('cart')) }}" id="old-cart">
+
+   <?php $el = (array) $errors; ?>
+
+   <input disabled type='hidden' name='old_cart_errors' value="{{ json_encode($el) }}" id="old-cart-errors">
 
    <div class='row'>
       <form class='col-md-7' method="POST" action="{{ url('/sale') }}">

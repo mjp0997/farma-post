@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\StockRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class OperationRequest extends FormRequest
@@ -28,6 +29,7 @@ class OperationRequest extends FormRequest
             'cart' => 'required|array',
             'cart.*.id' => 'required|integer|gt:0',
             'cart.*.quantity' => 'required|integer|gt:0',
+            'cart.*' => [new StockRule]
         ];
     }
 

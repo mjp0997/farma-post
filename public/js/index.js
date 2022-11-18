@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
    products.forEach(({ id, name, stock, price }) => productRow(id, name, price, stock));
 
+   await getCartErrors(products);
+
    // Busquedas
    searchForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -35,8 +37,6 @@ document.addEventListener('DOMContentLoaded', async () => {
          const search = new RegExp(value);
 
          const filtered = products.filter(product => product.name.toLocaleLowerCase().search(search) !== -1);
-
-         console.log(filtered);
 
          filtered.forEach(({ id, name, stock, price }) => productRow(id, name, price, stock));
       } else {
@@ -107,15 +107,11 @@ const productHandler = (id, name, price, stock) => {
       });
    }
 
-   cartTable.replaceChildren();
-
-   cart.forEach(({id, name, price, quantity}, i) => cartRow(id, name, price, quantity, i));
-
    updateData();
 }
 
 // Generar filas en la tabla del carro
-const cartRow = (id, name, price, quantity, index) => {
+const cartRow = (id, name, price, quantity, index, error = null) => {
    const tdClasses = ['text-xs', 'text-center', 'p-2'];
 
    const tr = document.createElement('tr');
@@ -126,6 +122,8 @@ const cartRow = (id, name, price, quantity, index) => {
 
    const qtyTd = document.createElement('td');
    qtyTd.classList.add(...tdClasses);
+   const col = document.createElement('div');
+   col.classList.add('d-flex', 'flex-column', 'align-items-center', 'gap-1');
    const flex = document.createElement('div');
    flex.classList.add('d-flex', 'justify-content-center', 'align-items-center','gap-2');
    const minus = document.createElement('i');
@@ -148,7 +146,14 @@ const cartRow = (id, name, price, quantity, index) => {
    flex.appendChild(inputQty);
    flex.appendChild(inputId);
    flex.appendChild(plus);
-   qtyTd.appendChild(flex);
+   col.appendChild(flex);
+   if (error) {
+      const errorDiv = document.createElement('div');
+      errorDiv.classList.add('text-danger', 'fw-bolder');
+      errorDiv.textContent = error;
+      col.appendChild(errorDiv);
+   }
+   qtyTd.appendChild(col);
 
    const priceTd = document.createElement('td');
    priceTd.classList.add(...tdClasses);
@@ -194,20 +199,12 @@ const quantityHandler = (id, quantity) => {
       return el;
    });
 
-   cartTable.replaceChildren();
-
-   cart.forEach((product, i) => cartRow(product.id, product.name, product.price, product.quantity, i));
-
    updateData();
 }
 
 // Acción para el botón eliminar de los elementos de la tabla del carro
 const deleteRow = (id) => {
    cart = cart.filter(el => el.id !== id);
-
-   cartTable.replaceChildren();
-
-   cart.forEach(({id, name, price, quantity}, i) => cartRow(id, name, price, quantity, i));
 
    updateData();
 }
@@ -216,7 +213,71 @@ const updateData = () => {
    const total = document.querySelector('#total');
    const totalQty = document.querySelector('#total-qty');
 
+   cartTable.replaceChildren();
+
+   cart.forEach(({id, name, price, quantity, error}, i) => cartRow(id, name, price, quantity, i, error));
+
    total.textContent = cart.reduce((total, el) => total + (el.quantity * el.price), 0).toFixed(2);
 
    totalQty.textContent = cart.reduce((total, el) => total + el.quantity, 0);
+}
+
+const getCartErrors = async (products) => {
+   const oldCartInput = document.querySelector('#old-cart');
+   const oldCartErrorsInput = document.querySelector('#old-cart-errors');
+
+
+
+   const oldCart = await JSON.parse(oldCartInput.value);
+
+   const cartData = oldCart ? oldCart : [];
+
+   const cartClean = cartData.filter(el => products.find(pr => pr.id === Number(el.id)));
+
+   cart = cartClean.map(el => {
+      const product = products.find(pr => pr.id === Number(el.id));
+
+      return {
+         ...product,
+         quantity: Number(el.quantity)
+      }
+   });
+
+
+
+   const oldCartErrors = await JSON.parse(oldCartErrorsInput.value);
+
+   const entries = Object.entries(oldCartErrors);
+
+   if (!Array.isArray(entries[0][1])) {
+      const errorList = entries[0][1].default;
+
+      const errorEntries = Object.entries(errorList);
+
+      const errorsFiltered = errorEntries.filter(([err]) => err.includes('cart'));
+
+      const errorsMapped = errorsFiltered.map(([_, err]) => {
+         const splitted = err[0].split('---');
+
+         return {
+            id: Number(splitted[0]),
+            error: splitted[1]
+         }
+      });
+
+      cart = cart.map(el => {
+         const error = errorsMapped.find(err => err.id === el.id);
+
+         if (error) {
+            return {
+               ...el,
+               error: error.error
+            }
+         }
+
+         return el;
+      });
+   }
+
+   updateData();
 }
