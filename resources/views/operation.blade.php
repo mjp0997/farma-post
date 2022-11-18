@@ -1,7 +1,7 @@
 @extends('layouts.operation')
 
 @section('content')
-   @if (!$allow)
+   @if (!$allow && !$errors->any())
       <div class='client-modal-container' id="modal">
          <div class='client-modal'>
             <form
