@@ -7,6 +7,7 @@ use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\UsersController;
 
 /*
@@ -38,6 +39,9 @@ Route::group(['middleware' => 'auth'], function () {
       Route::resource('/users', UsersController::class);
 
       Route::resource('/clients', ClientsController::class);
+
+      Route::get('/sales', [SalesController::class, 'index']);
+      Route::get('/sales/{id}', [SalesController::class, 'show']);
    });
 
    Route::group(['prefix' => '/sale'], function () {
