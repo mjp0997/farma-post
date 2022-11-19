@@ -27,7 +27,8 @@ class ProductsController extends Controller
 
         return view('products.list', [
             'bread' => $bread,
-            'products' => $products
+            'products' => $products,
+            'title' => 'FarmPOST - Productos'
         ]);
     }
 
@@ -50,7 +51,8 @@ class ProductsController extends Controller
         ];
         
         return view('products.create', [
-            'bread' => $bread
+            'bread' => $bread,
+            'title' => 'FarmPOST - Productos'
         ]);
     }
 
@@ -94,7 +96,8 @@ class ProductsController extends Controller
 
         return view('products.show', [
             'bread' => $bread,
-            'product' => $product
+            'product' => $product,
+            'title' => 'FarmPOST - Productos'
         ]);
     }
 
@@ -125,7 +128,8 @@ class ProductsController extends Controller
 
         return view('products.edit', [
             'bread' => $bread,
-            'product' => $product
+            'product' => $product,
+            'title' => 'FarmPOST - Productos'
         ]);
     }
 

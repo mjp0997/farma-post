@@ -25,7 +25,8 @@ class ClientsController extends Controller
 
         return view('clients.list', [
             'bread' => $bread,
-            'clients' => $clients
+            'clients' => $clients,
+            'title' => 'FarmPOST - Clientes'
         ]);
     }
 
@@ -48,7 +49,8 @@ class ClientsController extends Controller
         ];
         
         return view('clients.create', [
-            'bread' => $bread
+            'bread' => $bread,
+            'title' => 'FarmPOST - Clientes'
         ]);
     }
 
@@ -91,7 +93,8 @@ class ClientsController extends Controller
 
         return view('clients.show', [
             'bread' => $bread,
-            'client' => $client
+            'client' => $client,
+            'title' => 'FarmPOST - Clientes'
         ]);
     }
 
@@ -122,7 +125,8 @@ class ClientsController extends Controller
 
         return view('clients.edit', [
             'bread' => $bread,
-            'client' => $client
+            'client' => $client,
+            'title' => 'FarmPOST - Clientes'
         ]);
     }
 

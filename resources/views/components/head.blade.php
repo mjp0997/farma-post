@@ -8,7 +8,7 @@
    
    <link rel="icon" type="image/png" href="{{ asset('/logo.png') }}">
 
-   <title>Argon Dashboard 2 by Creative Tim</title>
+   <title>{{ isset($title) ? $title : 'FarmaPOST' }}</title>
 
    <!--     Fonts and icons     -->
    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />

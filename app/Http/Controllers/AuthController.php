@@ -23,7 +23,9 @@ class AuthController extends Controller
             return redirect('/');
         }
 
-        return view('auth.login');
+        return view('auth.login', [
+            'title' => 'FarmPOST - Login'
+        ]);
     }
 
     /**

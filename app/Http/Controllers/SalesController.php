@@ -24,7 +24,8 @@ class SalesController extends Controller
 
         return view('sales.list', [
             'bread' => $bread,
-            'sales' => $sales
+            'sales' => $sales,
+            'title' => 'FarmPOST - Ventas'
         ]);
     }
 
@@ -51,7 +52,8 @@ class SalesController extends Controller
 
         return view('sales.show', [
             'bread' => $bread,
-            'sale' => $sale
+            'sale' => $sale,
+            'title' => 'FarmPOST - Ventas'
         ]);
     }
 }

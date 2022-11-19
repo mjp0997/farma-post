@@ -32,7 +32,8 @@ class UsersController extends Controller
 
         return view('users.list', [
             'bread' => $bread,
-            'users' => $users
+            'users' => $users,
+            'title' => 'FarmPOST - Usuarios'
         ]);
     }
 
@@ -60,7 +61,8 @@ class UsersController extends Controller
         
         return view('users.create', [
             'bread' => $bread,
-            'roles' => $roles
+            'roles' => $roles,
+            'title' => 'FarmPOST - Usuarios'
         ]);
     }
 
@@ -105,7 +107,8 @@ class UsersController extends Controller
 
         return view('users.show', [
             'bread' => $bread,
-            'user' => $user
+            'user' => $user,
+            'title' => 'FarmPOST - Usuarios'
         ]);
     }
 
@@ -141,7 +144,8 @@ class UsersController extends Controller
         return view('users.edit', [
             'bread' => $bread,
             'user' => $user,
-            'roles' => $roles
+            'roles' => $roles,
+            'title' => 'FarmPOST - Usuarios'
         ]);
     }
 

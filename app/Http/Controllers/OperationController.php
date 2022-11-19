@@ -70,7 +70,8 @@ class OperationController extends Controller
             'allow' => false,
             'dni_disabled' => false,
             'dni_readonly' => false,
-            'client_disabled' => true
+            'client_disabled' => true,
+            'title' => 'FarmPOST - Panel de ventas'
         ]);
     }
 
@@ -163,7 +164,8 @@ class OperationController extends Controller
 
         return view('operation-results', [
             'bread' => $bread,
-            'sale' => $sale
+            'sale' => $sale,
+            'title' => 'FarmPOST - Panel de ventas'
         ]);
     }
 }
