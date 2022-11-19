@@ -19,7 +19,7 @@
                      <table class="table align-items-center mb-0">
                         <thead>
                            <tr>
-                              <th class="text-sm text-center fw-bolder p-2">Nombre</th>
+                              <th class="text-sm text-center fw-bolder p-2">Producto</th>
       
                               <th class="text-sm text-center fw-bolder p-2">Precio</th>
       
