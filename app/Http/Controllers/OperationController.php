@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 use App\Http\Requests\ClientOperationRequest;
 use App\Http\Requests\ClientRequest;
 use App\Http\Requests\OperationRequest;
+
 use App\Models\Client;
-use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Sale;
+use App\Models\SalesLine;
 
 class OperationController extends Controller
 {
@@ -112,9 +118,26 @@ class OperationController extends Controller
     {
         $data = $request->validated();
 
-        dd($data);
+        $sale = new Sale();
+        $sale->user_id = Auth::user()->id;
+        $sale->client_id = $data['client_id'];
+        $sale->save();
 
-        // TODO: manejar lógica
+        foreach ($data['cart'] as $cartline) {
+            $product = Product::find($cartline['id']);
+            $product->stock = $product->stock - $cartline['quantity'];
+            $product->save();
+
+            $salesline = new SalesLine();
+            $salesline->sale_id = $sale->id;
+            $salesline->product_id = $product->id;
+            $salesline->quantity = $cartline['quantity'];
+            $salesline->current_buy_price = $product->buy_price;
+            $salesline->current_price = $product->sell_price;
+            $salesline->save();
+        }
+
+        return redirect('/sale/'.$sale->id);
     }
 
     /**
@@ -125,6 +148,22 @@ class OperationController extends Controller
      */
     public function show($id)
     {
-        //
+        $sale = Sale::findOrFail($id);
+
+        $bread = [
+            [
+                'text' => 'Nueva venta',
+                'link' => '/sale'
+            ],
+            [
+                'text' => 'Venta #'.$sale->id,
+                'link' => '/sale/'.$sale->id
+            ]
+        ];
+
+        return view('operation-results', [
+            'bread' => $bread,
+            'sale' => $sale
+        ]);
     }
 }
