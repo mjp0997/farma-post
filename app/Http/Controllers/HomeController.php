@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SalesLine;
@@ -43,7 +44,7 @@ class HomeController extends Controller
         
         $today_clients = Sale::where('created_at', '>=', $current_date)->distinct()->count();
 
-        $new_clients = Sale::with('client')->whereRelation('client', 'created_at', '>=', $current_date)->distinct()->count();
+        $new_clients = Client::where('created_at', '>=', $current_date)->count();
 
         $today_products_stats = SalesLine::where('created_at', '>=', $current_date)
             ->groupBy('product_id')
