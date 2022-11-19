@@ -40,8 +40,13 @@ Route::group(['middleware' => 'auth'], function () {
       Route::resource('/clients', ClientsController::class);
    });
 
-   Route::get('/sale', [OperationController::class, 'index']);
-   Route::post('/sale/client/create', [OperationController::class, 'store_client']);
-   Route::post('/sale/client', [OperationController::class, 'handle_client']);
-   Route::post('/sale', [OperationController::class, 'store']);
+   Route::group(['prefix' => '/sale'], function () {
+       
+      Route::get('/', [OperationController::class, 'index']);
+      Route::post('/client/create', [OperationController::class, 'store_client']);
+      Route::post('/client', [OperationController::class, 'handle_client']);
+      Route::post('/', [OperationController::class, 'store']);
+      Route::get('/{id}', [OperationController::class, 'show']);
+   });
+
 });
