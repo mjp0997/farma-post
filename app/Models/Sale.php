@@ -12,7 +12,7 @@ class Sale extends Model
 
     protected $fillable = ['user_id', 'client_id'];
 
-    protected $appends = ['total'];
+    protected $appends = ['total', 'total_products', 'date', 'time'];
 
     public function getTotalAttribute()
     {
@@ -23,6 +23,27 @@ class Sale extends Model
         }
 
         return number_format($total, 2, ',', '.');
+    }
+
+    public function getTotalProductsAttribute()
+    {
+        $total = 0;
+
+        foreach ($this->saleslines as $salesline) {
+            $total += $salesline->quantity;
+        }
+
+        return $total;
+    }
+
+    public function getDateAttribute()
+    {
+        return date_format($this->created_at->tz('America/Caracas'), 'd-m-Y');
+    }
+
+    public function getTimeAttribute()
+    {
+        return date_format($this->created_at->tz('America/Caracas'), 'h:ma');
     }
 
     public function saleslines()
