@@ -20,8 +20,7 @@ class Access
         $user = Auth::user();
 
         if (!in_array($user->role->name, $types)) {
-            // TODO: cambiar redirección a la vista de usuarios
-            return redirect('/');
+            return redirect('/sale');
         }
         
         return $next($request);

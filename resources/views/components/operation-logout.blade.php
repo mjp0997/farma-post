@@ -2,7 +2,7 @@
    method="POST"
    action="{{ url('/logout') }}"
    class="btn btn-warning text-white font-weight-bold operation-logout"
-   id="logout"
+   id="logout-btn"
 >
    @csrf
 
@@ -15,7 +15,7 @@
    
 <script type="text/javascript">
    document.addEventListener("DOMContentLoaded", () => {
-      const logout = document.querySelector('#logout');
+      const logout = document.querySelector('#logout-btn');
 
       logout.addEventListener('click', () => {
          logout.submit();

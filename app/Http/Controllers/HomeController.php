@@ -16,12 +16,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
-        if ($user->role->name == 'USER') {
-            return redirect('/sale');
-        }
-
         $bread = [
             [
                 'text' => 'Inicio',
