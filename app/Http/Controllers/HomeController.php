@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SalesLine;
 use Illuminate\Support\Facades\Auth;
@@ -64,13 +65,19 @@ class HomeController extends Controller
             return $item;
         });
 
+        $low_stock_products = Product::where('stock', '<=', 10)->orderBy('name')->get();
+
+        $recent_sales = Sale::with('client', 'saleslines', 'saleslines.product')->where('created_at', '>=', $current_date)->orderBy('created_at', 'DESC')->limit(6)->get();
+
         return view('home', [
             'bread' => $bread,
             'earnings' => number_format($earnings, 2, ',', '.'),
             'clients' => $today_clients,
             'new_clients' => $new_clients,
             'today_sales' => number_format($today_sales, 2, ',', '.'),
-            'today_products_stats' => $today_products_stats
+            'today_products_stats' => $today_products_stats,
+            'low_stock_products' => $low_stock_products,
+            'recent_sales' => $recent_sales
         ]);
     }
 }
