@@ -119,6 +119,45 @@
       </div>
    </div>
 
+   <div class='row mt-4'>
+      <div class='col'>
+         <div class="card ">
+            <div class="card-header pb-0 p-3">
+               <div class="d-flex justify-content-between">
+                  <h6 class="mb-2">Productos más vendidos del día</h6>
+               </div>
+            </div>
+
+            <div class='d-flex flex-column p-3 gap-3'>
+               @foreach ($today_products_stats as $stat)
+                  <div class='d-flex align-items-center gap-3'>
+                     <div
+                        class="flex-shrink-0 text-end"
+                        style="width: 25%;"
+                        title="Producto: {{ $stat->product->name }}"
+                     >
+                        <p class='mb-0 text-sm' style="line-height: 110%">{{ $stat->product->name }}</p>
+                     </div>
+
+                     <div
+                        class='flex-shrink-0 d-flex gauge'
+                        style="width: 75%; height: 1rem; margin-right: 10%;"
+                        data-quantity="{{ $stat->sold_quantity }}"
+                        data-width="{{ $stat->percent_quantity.'%' }}"
+                     >
+                        <div
+                           style="width: {{ $stat->percent_quantity }}%; height: 100%;"
+                           class="bg-primary rounded"
+                           title="Cantidad de {{ $stat->product->name }} vendidos(as): {{ $stat->sold_quantity }}"
+                        ></div>
+                     </div>
+                  </div>
+               @endforeach
+            </div>
+         </div>
+      </div>
+   </div>
+
    <div class="row mt-4">
       <div class="col-lg-7 mb-lg-0 mb-4">
          <div class="card ">

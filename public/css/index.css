@@ -119,3 +119,17 @@
    top: 1.8rem;
    right: 1.8rem;
 }
+
+.gauge {
+   position: relative;
+}
+
+.gauge::after {
+   content: attr(data-quantity);
+   
+   font-size: 14px;
+   line-height: 110%;
+   text-align: center;
+   
+   width: 10%;
+}
