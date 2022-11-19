@@ -12,6 +12,19 @@ class Sale extends Model
 
     protected $fillable = ['user_id', 'client_id'];
 
+    protected $appends = ['total'];
+
+    public function getTotalAttribute()
+    {
+        $total = 0;
+
+        foreach ($this->saleslines as $salesline) {
+            $total += $salesline->quantity * $salesline->current_price;
+        }
+
+        return number_format($total, 2, ',', '.');
+    }
+
     public function saleslines()
     {
         return $this->hasMany(SalesLine::class, 'sale_id', 'id');
