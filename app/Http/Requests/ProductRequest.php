@@ -26,9 +26,9 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'buy_price' => 'required|gt:0',
-            'sell_price' => 'required|gt:0',
-            'stock' => 'nullable|min:0'
+            'buy_price' => 'required|numeric|gt:0',
+            'sell_price' => 'required|numeric|gt:0',
+            'stock' => 'required|integer|min:0'
         ];
     }
 
@@ -37,9 +37,13 @@ class ProductRequest extends FormRequest
         return [
             'name.required' => 'El nombre es obligatorio',
             'buy_price.required' => 'El precio de compra es obligatorio',
+            'buy_price.numeric' => 'El precio de compra debe ser un número',
             'buy_price.gt' => 'El precio de compra mínimo es 0.01',
-            'sell_price.required' => 'El precio de compra es obligatorio',
+            'sell_price.required' => 'El precio de venta es obligatorio',
+            'sell_price.numeric' => 'El precio de venta debe ser un número',
             'sell_price.gt' => 'El precio de venta mínimo es 0.01',
+            'stock.required' => 'El stock es obligatorio',
+            'stock.integer' => 'El stock debe ser un entero',
             'stock.min' => 'El stock mínimo es 0'
         ];
     }
